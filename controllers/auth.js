@@ -14,9 +14,9 @@ const registerUser = async (req, res) => {
 
         await user.save();
 
-        res.status(201).json({ message: 'User registered successfully' });
+        return res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
     }
 };
 
@@ -40,9 +40,9 @@ const loginUser = async (req, res) => {
         user.token = token;
         await user.save();
 
-        res.json({ token });
+        return res.json({ token });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+       return res.status(400).json({ message: error.message });
     }
 };
 
@@ -61,10 +61,10 @@ const validateToken = async (req, res) => {
         return res.status(403).json({ message: 'Invalid token' });
       }
   
-      res.json({ message: "Valid Token" });
+      return res.json({ message: "Valid Token" });
     } catch (error) {
       console.error('Error validating token:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ message: 'Internal server error' });
     }
   }
 
