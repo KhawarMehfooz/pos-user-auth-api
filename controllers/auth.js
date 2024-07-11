@@ -33,14 +33,21 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
-        // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
-        // Save token to user document
+        const cookieExpiration = new Date();
+        cookieExpiration.setMonth(cookieExpiration.getMonth()+1)
+
+        res.cookie('auth_token',token,{
+          httpOnly: true,
+          sameSite: 'strict',
+          expires: cookieExpiration
+        })
+
         user.token = token;
         await user.save();
 
-        return res.json({ token });
+        return res.status(200).json({message: 'Login Successful'});
     } catch (error) {
        return res.status(400).json({ message: error.message });
     }
