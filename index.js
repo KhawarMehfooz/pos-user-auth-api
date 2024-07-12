@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: process.env.AUTH_API_ORIGIN
+  origin: "https://pos-front-end-beta.vercel.app"
 }));
 
 app.use('/users', authRoutes);
