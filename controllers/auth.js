@@ -61,6 +61,7 @@ const loginUser = async (req, res) => {
 const validateToken = async (req, res) => {
   try {
     const authHeader = req.headers['authorization'];
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ message: 'Bearer token is required' });
     }
@@ -68,19 +69,23 @@ const validateToken = async (req, res) => {
     const token = authHeader.split(' ')[1];
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
     const user = await User.findById(decodedToken.userId);
+    
     if (!user) {
       return res.status(403).json({ message: 'Invalid token' });
     }
 
-    return res.json({ message: "Valid Token" });
+    return res.status(200).json({ 
+      name: user.fullName,
+      email: user.email,
+      token: user.token 
+    });
   } catch (error) {
     console.error('Error validating token:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 }
-
-
 
 module.exports = {
   registerUser,

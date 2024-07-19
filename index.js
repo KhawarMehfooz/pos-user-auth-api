@@ -7,10 +7,10 @@ const authRoutes = require('./routes/auth');
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-  origin: "https://pos-front-end-beta.vercel.app"
-}));
-
+// app.use(cors({
+//   origin: "https://pos-front-end-beta.vercel.app"
+// }));
+app.use(cors())
 app.use('/users', authRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
