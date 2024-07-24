@@ -7,7 +7,7 @@
 ### Register User
 
 ```http
-  POST /user/register
+  POST /users/register
 ```
 
 | Parameter  | Type     | Description                   |
@@ -19,7 +19,7 @@
 ### Login User
 
 ```http
-  POST /user/login
+  POST /users/login
 ```
 
 | Parameter  | Type     | Description                   |
@@ -30,7 +30,7 @@
 ### Validate User
 
 ```http
-  POST /user/validate
+  POST /users/validate
 ```
 
 | Parameter | Type     | Description                |
