@@ -76,7 +76,8 @@ const validateToken = async (req, res) => {
       return res.status(403).json({ message: 'Invalid token' });
     }
 
-    return res.status(200).json({ 
+    return res.status(200).json({
+      id: user._id, 
       name: user.fullName,
       email: user.email,
       token: user.token 
